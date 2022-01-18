@@ -45,15 +45,15 @@ const initialScore = (hands) => {
 }
 
 //initialize game
-const deck = initialDeck();
-const computerHand = [];
-const playerHand = [];
+let deck = initialDeck();
+let computerHand = [];
+let playerHand = [];
 computerHand.push(deck.shift())
 playerHand.push(deck.shift())
 computerHand.push(deck.shift())
 playerHand.push(deck.shift())
-const computerScore = initialScore(computerHand);
-const playerScore = initialScore(playerHand);
+let computerScore = initialScore(computerHand);
+let playerScore = initialScore(playerHand);
 
 function Game(props){
     //states
@@ -110,26 +110,68 @@ function Game(props){
         setCh([...ch,...newHits]);
         setWinner(tmp);
     }
+
+    function handleReset(evt){
+        deck = initialDeck();
+        computerHand = [];
+        playerHand = [];
+        computerHand.push(deck.shift())
+        playerHand.push(deck.shift())
+        computerHand.push(deck.shift())
+        playerHand.push(deck.shift())
+        computerScore = initialScore(computerHand);
+        playerScore = initialScore(playerHand);
+        setPh(playerHand);
+        setCh(computerHand);
+        setPs(playerScore);
+        setCs(computerScore);
+        setWinner("");
+    }
     
     if(winner){
         return(
-            <div>
-                <Score identity="Computer" score={cs} />
-                <Hand hand={ch} />
-                <Score identity="Player" score={ps} />
-                <Hand hand={ph} />
-                <Result winner={winner} /> 
+            <div className='Container'>
+                <div className='Game'>
+                    <div className='GamePart'>
+                        <div className='scoreboard'>
+                            <Score identity="Computer" score={cs} />
+                        </div> 
+                        <Hand hand={ch} />
+                    </div>
+                    <div className='GamePart'>
+                        <div className='scoreboard'>
+                            <Score identity="Player" score={ps} />
+                        </div>
+                        <Hand hand={ph} />
+                    </div>
+                    <Result winner={winner}/>
+                    <div className='options'>
+                        <Reset handler={handleReset} />
+                    </div>
+                </div>
             </div>
         )
     }else{
         return(
-            <div>
-                <Score identity="Computer" score={cs} />
-                <Hand hand={ch} />
-                <Score identity="Player" score={ps} />
-                <Hand hand={ph} />
-                <Btn handler={handleHit} value="Hit!" />
-                <Btn handler={handleStand} value="Stand.." />
+            <div className='Container'>
+                <div className='Game'>
+                    <div className='GamePart'>
+                        <div className='scoreboard'>
+                            <Score identity="Computer" score={cs} />
+                        </div> 
+                        <Hand hand={ch} />
+                    </div>
+                    <div className='GamePart'>
+                        <div className='scoreboard'>
+                            <Score identity="Player" score={ps} />
+                        </div>
+                        <Hand hand={ph} />
+                    </div>
+                    <div className='options'>
+                        <Btn handler={handleHit} value="Hit!" />
+                        <Btn handler={handleStand} value="Stand.." />
+                    </div>
+                </div>
             </div>
         )
     }
@@ -153,8 +195,9 @@ function Hand(props){
 
 function Card(props){
     return(
-        <div className='Card'>
-            {props.suit}{props.val}
+        <div class="Card">
+            <div className="top-left">{props.val}{props.suit}</div>
+            <div className="bottom-right">{props.val}{props.suit}</div>  
         </div>
     )
 }
@@ -164,9 +207,12 @@ function Btn(props){
 }
 
 function Result(props){
-    return(<h2>{props.winner}</h2>)
+    return(<h2>{props.winner} Win!</h2>)
 }
 
+function Reset(props){
+    return(<button onClick={props.handler}>Restart</button>)
+}
 
 ReactDOM.render(
     <Game />,

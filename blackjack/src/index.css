@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+body {
+  background-color: green;
+}
+
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+}
+
+.GamePart {
+  margin-top: 1rem;
+}
+
+.scoreboard {
+  margin: 1em 0em 1em 0em;
+}
+
+.Game {
+  max-width: 100%;
+  align-content: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.Hand {
+  display: flex;
+}
+
+.options {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.Card {
+  border: solid black;
+  font-size: 1em;
+  box-shadow: 0px 5px 10px grey;
+  margin: 0rem 1.5rem 0rem 1.5rem;
+  display: grid;
+  height: 100px;
+  width: 70px;
+  background-color: white;
+}
+
+.top-left {
+  padding: 0.1em;
+}
+
+.bottom-right {
+  bottom: 0px;
+  right: 0px;
+  transform: rotate(180deg);
+}
+
+button {
+  margin: 0em 1em 0em 1em;
+}
